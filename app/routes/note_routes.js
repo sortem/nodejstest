@@ -13,7 +13,7 @@ module.exports = function(app, db) {
   });
 
 	app.post('/notes', (req, res) => {
-	const note = { title: req.body.title };
+	const note = { title: req.body };
 	db.collection('notes').insert(note, (err, result) => {
 		if (err) {
 			res.send({ 'error': 'An error has occured'});
@@ -27,7 +27,7 @@ module.exports = function(app, db) {
 	app.put ('/notes/:id', (req, res) => {
     const id = req.params.id;
     const details = { '_id': new ObjectID(id) };
-    const note = { title: req.body.title };
+    const note = { title: req.body };
     db.collection('notes').update(details, note, (err, result) => {
       	if (err) {
           	res.send({'error':'An error has occurred'});
